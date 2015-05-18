@@ -93,4 +93,11 @@ public class BtnActivity extends ActionBarActivity implements Button.OnClickList
         Log.d(LOG_TAG,"..."+buttons.get(index).getBackground());
 //        if (buttons.get(index).getBackground())
     }
+
+    public void onClickBtnReset(View view) {
+        for (int i=0;i<25;i++){
+          //  buttons.get(i).setBackgroundColor(null);
+            buttons.get(i).setBackgroundResource(android.R.drawable.btn_default);
+        }
+    }
 }

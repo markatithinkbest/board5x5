@@ -1,5 +1,6 @@
 package com.ithinkbest.board5x5;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -7,15 +8,37 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import b5util.Board5x5;
+import b5util.Board5x5Counter;
 
 
-public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnClickListener{
-    private static String LOG_TAG="MARK987";
+//300#E0E0E0
+//        400#BDBDBD
+//        500#9E9E9E
+//        600#757575
+
+
+public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnClickListener {
+    private int color300 = 0xFFE0E0E0;
+    private int color400 = 0xFFBDBDBD;
+    private int color500 = 0xFF9E9E9E;
+    private int color600 = 0xFF757575;
+
+
+    private static String LOG_TAG = "MARK987";
+    private TextView txtStatus;
+    private TextView txtDebug;
+
     private List<Button> buttons;
+    private List<Integer> checkedList;
     private static final int[] BUTTON_IDS = {
             R.id.btn0,
             R.id.btn1,
@@ -45,12 +68,16 @@ public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnC
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_btn_cnt_lines);
 
+        txtStatus=(TextView)findViewById(R.id.txtStatus);
+        txtDebug=(TextView)findViewById(R.id.txtDebug);
+
+
+        checkedList = new ArrayList<>();
         buttons = new ArrayList<Button>();
         for (int id : BUTTON_IDS) {
             Button button = (Button) findViewById(id);
@@ -58,10 +85,10 @@ public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnC
             button.setTextAppearance(this, android.R.style.TextAppearance_Large);
             buttons.add(button);
         }
-        for (int i=0;i<25;i++){
-            buttons.get(i).setText(""+i);
+        for (int i = 0; i < 25; i++) {
+            buttons.get(i).setText("" + i);
         }
-
+        resetBtnBackgroud();
     }
 
     @Override
@@ -86,11 +113,45 @@ public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnC
         return super.onOptionsItemSelected(item);
     }
 
+
+    public static int[] getIntArray(List<Integer> integers)
+    {
+        int[] ret = new int[integers.size()];
+        for (int i=0; i < ret.length; i++)
+        {
+            ret[i] = integers.get(i).intValue();
+        }
+        return ret;
+    }
     @Override
     public void onClick(View v) {
         int index = v.getId() - R.id.btn0;
-        Toast.makeText(this,"index="+index,Toast.LENGTH_SHORT).show();
-        Log.d(LOG_TAG,"..."+buttons.get(index).getBackground());
+        Toast.makeText(this, "index=" + index, Toast.LENGTH_SHORT).show();
+
+        buttons.get(index).setBackgroundColor(color600);
+        checkedList.add(index);
+        Board5x5 lineCounter=new Board5x5Counter();
+       // lineCounter.setChecked();
+//        List<Integer> list = ...;
+//        int[] values = Ints.toArray(list);
+        //Set<Integer> set= new HashSet<>(checkedList);
+        int[] arr=getIntArray(checkedList);
+        lineCounter.setChecked(arr);
+        int lineCnt=lineCounter.getLineCount();
+        txtStatus.setText("line cnt: "+lineCnt);
+
+        Log.d(LOG_TAG, "..." + buttons.get(index).getBackground());
 //        if (buttons.get(index).getBackground())
+    }
+
+    private void resetBtnBackgroud(){
+        for (int i = 0; i < 25; i++) {
+            buttons.get(i).setBackgroundColor(color300);
+        }
+    }
+    public void onClickBtnReset(View view) {
+        resetBtnBackgroud();
+        checkedList.clear();
+        txtStatus.setText("");
     }
 }
