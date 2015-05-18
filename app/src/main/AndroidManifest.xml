@@ -10,6 +10,16 @@
         <activity
             android:name=".BtnActivity"
             android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".BtnCntLinesActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
