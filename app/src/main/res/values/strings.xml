@@ -7,4 +7,5 @@
     <string name="btn1">Board 5x5</string>
     <string name="btn2">Line Counter</string>
     <string name="btnReset">Reset</string>
+    <string name="btn3">Game 1</string>
 </resources>

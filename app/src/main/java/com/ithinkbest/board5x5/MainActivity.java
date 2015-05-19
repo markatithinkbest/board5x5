@@ -49,4 +49,12 @@ public class MainActivity extends ActionBarActivity {
 
         startActivity(intent);
     }
+
+    public void onClickBtn3(View view) {
+
+            Intent intent = new Intent(this, Game1Activity.class);
+
+            startActivity(intent);
+       
+    }
 }
