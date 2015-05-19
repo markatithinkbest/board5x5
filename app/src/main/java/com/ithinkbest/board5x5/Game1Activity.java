@@ -3,6 +3,7 @@ package com.ithinkbest.board5x5;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ import b5util.Board5x5Counter;
     private int color500 = 0xFF9E9E9E;
     private int color600 = 0xFF757575;
 
-
+    private int[]val;
     private static String LOG_TAG = "MARK987";
     private TextView txtStatus;
     private TextView txtDebug1;
@@ -146,7 +147,7 @@ import b5util.Board5x5Counter;
     @Override
     public void onClick(View v) {
         int index = v.getId() - R.id.btn0;
-        Toast.makeText(this, "index=" + index, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "index=" + index, Toast.LENGTH_SHORT).show();
 
         buttons.get(index).setBackgroundColor(color600);
         checkedList.add(index);
@@ -155,10 +156,11 @@ import b5util.Board5x5Counter;
         lineCounter.setChecked(arr);
         int lineCnt=lineCounter.getLineCount();
         txtStatus.setText("line cnt: "+lineCnt);
-        txtDebug1.setText(lineCounter.getTextBoard(1));
+        Log.d(LOG_TAG,"Human p("+index+")="+val[index]);
+      //  txtDebug1.setText(lineCounter.getTextBoard(1));
 
-        B253 b=new B253();
-        txtDebug2.setText(b.toString());
+      //  B253 b=new B253();
+       // txtDebug2.setText(b.toString());
 
     }
 
@@ -171,5 +173,18 @@ import b5util.Board5x5Counter;
         resetBtnBackgroud();
         checkedList.clear();
         txtStatus.setText("");
+        B253 b1=new B253();
+        B253 b2=new B253();
+
+        b1.makeRandomSet();
+        b2.makeRandomSet();
+
+        val=b1.getValArray();
+
+        for (int i = 0; i < 25; i++) {
+            buttons.get(i).setText(""+val[i]);
+        }
+
+        txtDebug2.setText(b2.toString());
     }
 }
