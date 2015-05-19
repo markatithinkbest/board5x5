@@ -30,7 +30,8 @@ import b5util.Board5x5Counter;
 //        600#757575
 
 
-public class BtnCntLinesActivity extends Activity implements Button.OnClickListener {
+//public class BtnCntLinesActivity extends Activity implements Button.OnClickListener {
+    public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnClickListener {
     private int color300 = 0xFFE0E0E0;
     private int color400 = 0xFFBDBDBD;
     private int color500 = 0xFF9E9E9E;
