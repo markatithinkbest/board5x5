@@ -1,5 +1,7 @@
 package com.ithinkbest.board5x5;
 
+import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +30,7 @@ import b5util.Board5x5Counter;
 //        600#757575
 
 
-public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnClickListener {
+public class BtnCntLinesActivity extends Activity implements Button.OnClickListener {
     private int color300 = 0xFFE0E0E0;
     private int color400 = 0xFFBDBDBD;
     private int color500 = 0xFF9E9E9E;
@@ -91,6 +95,24 @@ public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnC
         resetBtnBackgroud();
     }
 
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_btn_cnt_lines_land);
+
+
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_btn_cnt_lines);
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -130,18 +152,11 @@ public class BtnCntLinesActivity extends ActionBarActivity implements Button.OnC
 
         buttons.get(index).setBackgroundColor(color600);
         checkedList.add(index);
-        Board5x5 lineCounter=new Board5x5Counter();
-       // lineCounter.setChecked();
-//        List<Integer> list = ...;
-//        int[] values = Ints.toArray(list);
-        //Set<Integer> set= new HashSet<>(checkedList);
+        Board5x5 lineCounter=new Board5x5Counter();;
         int[] arr=getIntArray(checkedList);
         lineCounter.setChecked(arr);
         int lineCnt=lineCounter.getLineCount();
         txtStatus.setText("line cnt: "+lineCnt);
-
-        Log.d(LOG_TAG, "..." + buttons.get(index).getBackground());
-//        if (buttons.get(index).getBackground())
     }
 
     private void resetBtnBackgroud(){
