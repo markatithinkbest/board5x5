@@ -27,6 +27,10 @@ import b5util.Board5x5Counter;
 
 //public class BtnCntLinesActivity extends Activity implements Button.OnClickListener {
     public class Game1Activity extends ActionBarActivity implements Button.OnClickListener {
+
+    private B253 b1;//Human
+    private B253 b2;//Android
+
     private int color300 = 0xFFE0E0E0;
     private int color400 = 0xFFBDBDBD;
     private int color500 = 0xFF9E9E9E;
@@ -145,8 +149,8 @@ import b5util.Board5x5Counter;
         return ret;
     }
     @Override
-    public void onClick(View v) {
-        int index = v.getId() - R.id.btn0;
+    public void onClick(View view) {
+        int index = view.getId() - R.id.btn0;
        // Toast.makeText(this, "index=" + index, Toast.LENGTH_SHORT).show();
 
         buttons.get(index).setBackgroundColor(color600);
@@ -156,8 +160,10 @@ import b5util.Board5x5Counter;
         lineCounter.setChecked(arr);
         int lineCnt=lineCounter.getLineCount();
         txtStatus.setText("line cnt: "+lineCnt);
-        Log.d(LOG_TAG,"Human p("+index+")="+val[index]);
-      //  txtDebug1.setText(lineCounter.getTextBoard(1));
+        Log.d(LOG_TAG, "Human pos(" + index + ")=" + val[index]);
+        int v=val[index];
+        Log.d(LOG_TAG,"Android val("+v+")="+b2.getPosition(v));
+        //  txtDebug1.setText(lineCounter.getTextBoard(1));
 
       //  B253 b=new B253();
        // txtDebug2.setText(b.toString());
@@ -173,8 +179,8 @@ import b5util.Board5x5Counter;
         resetBtnBackgroud();
         checkedList.clear();
         txtStatus.setText("");
-        B253 b1=new B253();
-        B253 b2=new B253();
+         b1=new B253();
+        b2=new B253();
 
         b1.makeRandomSet();
         b2.makeRandomSet();
