@@ -34,4 +34,5 @@ public interface Board5x5 {
 	int ERROR_ARRAY_VALUE_ABOVE_MAXINUM=-996;
 	
 	void setChecked(int[] checked);
+	String getTextBoard(int style);
 }

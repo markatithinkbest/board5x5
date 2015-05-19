@@ -220,12 +220,29 @@
         android:onClick="onClickBtnReset"
 
         android:id="@+id/btnReset" />
-    <TextView
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Debug"
-        android:visibility="gone"
-        android:id="@+id/txtDebug" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Debug1\n12345"
+            android:typeface="monospace"
+            android:visibility="visible"
+            android:id="@+id/txtDebug1" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:layout_height="wrap_content"
+            android:text="Debug2"
+            android:visibility="visible"
+            android:id="@+id/txtDebug2" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

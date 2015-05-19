@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import b5util.B253;
 import b5util.Board5x5;
 import b5util.Board5x5Counter;
 
@@ -33,7 +34,9 @@ import b5util.Board5x5Counter;
 
     private static String LOG_TAG = "MARK987";
     private TextView txtStatus;
-    private TextView txtDebug;
+    private TextView txtDebug1;
+    private TextView txtDebug2;
+
 
     private List<Button> buttons;
     private List<Integer> checkedList;
@@ -69,10 +72,11 @@ import b5util.Board5x5Counter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_btn_cnt_lines);
+        setContentView(R.layout.activity_game1);
 
         txtStatus=(TextView)findViewById(R.id.txtStatus);
-        txtDebug=(TextView)findViewById(R.id.txtDebug);
+        txtDebug1=(TextView)findViewById(R.id.txtDebug1);
+        txtDebug2=(TextView)findViewById(R.id.txtDebug2);
 
 
         checkedList = new ArrayList<>();
@@ -151,6 +155,11 @@ import b5util.Board5x5Counter;
         lineCounter.setChecked(arr);
         int lineCnt=lineCounter.getLineCount();
         txtStatus.setText("line cnt: "+lineCnt);
+        txtDebug1.setText(lineCounter.getTextBoard(1));
+
+        B253 b=new B253();
+        txtDebug2.setText(b.toString());
+
     }
 
     private void resetBtnBackgroud(){
